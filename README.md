@@ -41,6 +41,9 @@ for(Object gridCell: pathWaypoints){
 }
 ```
 
+***Disclaimer**
+*I know this code contains bad code but the main A* classes were written in 2005 and will be optimized later.*
+
 Code written by Maurice Tedder (based on the Java Applet by James Macgill - http://www.ccg.leeds.ac.uk/james/aStar/
 
   
