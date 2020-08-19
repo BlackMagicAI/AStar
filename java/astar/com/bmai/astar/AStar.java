@@ -70,22 +70,22 @@ public class AStar {
     //public  GridCell[] findPath(Map gridMap){
     public  Object[] findPath(Map gridMap){
     
-    int state  = NOT_FOUND; //path found state variable
-    //GridCell[] waypointsList = null;
-    Object[] waypointsList = null;//path found gridcells object array
-    openList.clear();//reset open list
-    closedList.clear();//reset open list - start with empty arraylist
-    openList.add(gridMap.getStartCell()); //add start cell to openlist
+        int state  = NOT_FOUND; //path found state variable
+        //GridCell[] waypointsList = null;
+        Object[] waypointsList = null;//path found gridcells object array
+        openList.clear();//reset open list
+        closedList.clear();//reset open list - start with empty arraylist
+        openList.add(gridMap.getStartCell()); //add start cell to openlist
 
-    while (state == NOT_FOUND){
-        state = gridStep(gridMap);        
-    }//End While
-    if (state == FOUND_FINISH) {
-        waypointsList = setPath(gridMap); //set find grid cells of path found
-    }//End If
-    
-    return waypointsList;
-}//
+        while (state == NOT_FOUND){
+            state = gridStep(gridMap);        
+        }//End While
+        if (state == FOUND_FINISH) {
+            waypointsList = setPath(gridMap); //set find grid cells of path found
+        }//End If
+        
+        return waypointsList;
+    }//
     
     /**
      * Evaluates grid cell for the shortest path. Returns the state of
@@ -106,7 +106,7 @@ public class AStar {
 		ArrayList<GridCell> temp = (ArrayList<GridCell>) openList.clone(); // open nodes list
 		GridCell best = ((GridCell)temp.get(temp.size()-1));
 		GridCell now = null;
-		
+		//TODO This loop serves the purpose of a PriorityQueue. Revise with PriorityQueue in future version 
 		for (int i = 0; i < temp.size(); i++) {//loop through OPEN list        
 			
 			now = ((GridCell) temp.get(i));//set first element as node_current   

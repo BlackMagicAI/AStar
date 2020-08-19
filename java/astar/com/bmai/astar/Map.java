@@ -245,8 +245,8 @@ public class Map {
       return small;
 	  }//
 	  
-	   /**
-	    * Return the start grid cell in the map grid.
+	/**
+	* Return the start grid cell in the map grid.
 	 * @return - The grid cell designated as the start cell in the gridcellmap.
 	 */
 	public GridCell getStartCell() {
@@ -278,8 +278,8 @@ public class Map {
        return null;
 	   }//
 	
-	  /**
-	   * Set a gridcell to type of obstacle it represents.
+	/**
+	 * Set a gridcell to type of obstacle it represents.
 	 * @param xPosition - x grid coordinate of the cell to set.
 	 * @param yPosition - y grid coordinate of the cell to set.
 	 * @param gridCellCost - Cost value of the cell to be set.
