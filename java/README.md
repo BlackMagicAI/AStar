@@ -25,7 +25,7 @@ Follow the command prompts to create a grid manually or read from a text file ge
 
 
 ### Video
-YouTube Tutorial Video is [here] (https://youtu.be/xqHJxILaVrw) for Java.
+YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Java.
 
 ### Core Code
 

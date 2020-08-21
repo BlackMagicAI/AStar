@@ -8,14 +8,14 @@ This project contains a Java and Python Grid based implementation of the A* (A S
 Grid Maps for the algorithm can be created manually or read from a text file generated using this [online ascii maze generator tool](https://www.dcode.fr/maze-generator).
 
 ### Video
-YouTube Tutorial Video is [here] (https://youtu.be/xqHJxILaVrw) for Java.
-YouTube Tutorial Video is [here] (https://youtu.be/xqHJxILaVrw) for Python.
+* YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Java.
+* YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Python.
 
 ### Core Code
 
   
 
-The code for the Java and Python implementations are in their respective folders of this repo contains additional usage instructions.
+The code for the Java and Python implementations are in their respective folders of this repo and contains additional usage instructions.
 
 Code written by Maurice Tedder (based on the Java Applet by James Macgill - http://www.ccg.leeds.ac.uk/james/aStar/
 
