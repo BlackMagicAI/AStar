@@ -25,7 +25,7 @@ public class AStarDriver {
         int option = scan.nextInt();
 
         // Create grid and display in ascii charactors
-        Map gridMap = null; //new Map(cols, rows);// grid cell map object
+        GridMap gridMap = null;
 
         switch (option) {
 
@@ -34,14 +34,12 @@ public class AStarDriver {
             // Get user input for grid size
             System.out.println("Enter number of Grid Map Columns");
             int cols = scan.nextInt();
-            // long cols = 0;
+
             System.out.println("Enter number of Grid Map Rows");
             int rows = scan.nextInt();
-            // long rows = 0;
 
             System.out.println("You entered " + cols + " cols and " + rows + " rows");
             gridMap = manualGrid(rows, cols);
-            //gridMap = manualGrid(cols, rows);
             break;
 
         case 2:// load from file
@@ -77,31 +75,31 @@ public class AStarDriver {
             switch (cellType) {
 
             case 1:
-                gridMap.setGridCell(row, col, Map.NORMAL, Map.START_CELL);
+                gridMap.setGridCell(row, col, GridMap.NORMAL, GridMap.START_CELL);
                 break;
 
             case 2:
-                gridMap.setGridCell(row, col, Map.EASY, Map.NORMAL_CELL);
+                gridMap.setGridCell(row, col, GridMap.EASY, GridMap.NORMAL_CELL);
                 break;
 
             case 3:
-                gridMap.setGridCell(row, col, Map.NORMAL, Map.NORMAL_CELL);
+                gridMap.setGridCell(row, col, GridMap.NORMAL, GridMap.NORMAL_CELL);
                 break;
 
             case 4:
-                gridMap.setGridCell(row, col, Map.TOUGH, Map.NORMAL_CELL);
+                gridMap.setGridCell(row, col, GridMap.TOUGH, GridMap.NORMAL_CELL);
                 break;
 
             case 5:
-                gridMap.setGridCell(row, col, Map.VERY_TOUGH, Map.NORMAL_CELL);
+                gridMap.setGridCell(row, col, GridMap.VERY_TOUGH, GridMap.NORMAL_CELL);
                 break;
 
             case 6:
-                gridMap.setGridCell(row, col, Map.BLOCK, Map.NORMAL_CELL);
+                gridMap.setGridCell(row, col, GridMap.BLOCK, GridMap.NORMAL_CELL);
                 break;
 
             case 7:
-                gridMap.setGridCell(row, col, Map.NORMAL, Map.FINISH_CELL);
+                gridMap.setGridCell(row, col, GridMap.NORMAL, GridMap.FINISH_CELL);
                 break;
 
             default:
@@ -117,7 +115,6 @@ public class AStarDriver {
         }//end while loop
 
         //Calculate A* path
-        // gridMap = calcAStar(gridMap);
         calcAStar(gridMap);
             
         //plot path on display grid
@@ -129,11 +126,10 @@ public class AStarDriver {
      * @param gridMap
      * @return Map containing path waypoints.
      */
-    private static Map calcAStar(Map gridMap) {
+    private static GridMap calcAStar(GridMap gridMap) {
 
         AStar aStar = new AStar();//shortest path algorithm class
-        //Object[] pathWaypoints = aStar.findPath(gridMap);
-        GridCell[] pathWaypoints = aStar.findPath2(gridMap);
+        GridCell[] pathWaypoints = aStar.findPath(gridMap);
 
         if(pathWaypoints == null ){//no path found        		
             System.out.println("NO PATH FOUND!");	 	        				
@@ -147,22 +143,10 @@ public class AStarDriver {
             int waypointXCoordinate = 0;
             int waypointYCoordinate = 0;
             for(GridCell gridCell: pathWaypoints){
-                // System.out.println("pos:" + gridCell.position);
-                //if (gridCell.position.y > 0) {
                     waypointXCoordinate = (int) gridCell.position.x;
                     waypointYCoordinate = (int) gridCell.position.y;
-                    /* Ignore points at y = 0 coordinate for more accurate centroid */
-                    gridMap.setGridCell(waypointXCoordinate, waypointYCoordinate, Map.PATH, Map.NORMAL_CELL);
-                //} // end ignore y = 0 points
+                    gridMap.setGridCell(waypointXCoordinate, waypointYCoordinate, GridMap.PATH, GridMap.NORMAL_CELL);
             }            
-            // for(Object gridCell: pathWaypoints){
-            //     if (((GridCell) gridCell).position.y > 0) {
-            //         waypointXCoordinate = (int) (((GridCell) gridCell).position.x);
-            //         waypointYCoordinate = (int) (((GridCell) gridCell).position.y);
-            //         /* Ignore points at y = 0 coordinate for more accurate centroid */
-            //         gridMap.setGridCell(waypointXCoordinate, waypointYCoordinate, Map.PATH, Map.NORMAL_CELL);
-            //     } // end ignore y = 0 points
-            // }
         }
         return gridMap;
     }
@@ -170,7 +154,7 @@ public class AStarDriver {
     /**
      * Load A* grid from file.
      */
-    private static Map gridFromFile(String fileName, Map gridMap) {
+    private static GridMap gridFromFile(String fileName, GridMap gridMap) {
 
         long cols = 0;
         long rows = 0;
@@ -181,7 +165,7 @@ public class AStarDriver {
             rows = Files.lines(path).count();
             long fileSize = Files.size(path);
             cols = (long) Math.ceil((((double) fileSize / rows) / 1.866));
-            gridMap = new Map((int)rows, (int)cols);//new Map((int)cols, (int)rows); //
+            gridMap = new GridMap((int)rows, (int)cols);//new Map((int)cols, (int)rows); //
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -204,9 +188,9 @@ public class AStarDriver {
                     }
                 } else {
                     if (val == 32) {
-                        gridMap.setGridCell(y,x, Map.NORMAL, Map.NORMAL_CELL);
+                        gridMap.setGridCell(y,x, GridMap.NORMAL, GridMap.NORMAL_CELL);
                     } else {
-                        gridMap.setGridCell(y,x, Map.BLOCK, Map.NORMAL_CELL);
+                        gridMap.setGridCell(y,x, GridMap.BLOCK, GridMap.NORMAL_CELL);
                     }
                     x++;
                     if (x > cols - 1) {
@@ -228,8 +212,8 @@ public class AStarDriver {
     /**
      * Manually create A* grid.
      */
-    private static Map manualGrid(int rows, int cols) {
-        return new Map(rows, cols);// grid cell map object
+    private static GridMap manualGrid(int rows, int cols) {
+        return new GridMap(rows, cols);// grid cell map object
     }
 
     /**
@@ -241,13 +225,11 @@ public class AStarDriver {
      * 
      * @param gridMap
      */
-    private static void displayGrid(Map gridMap) {
+    private static void displayGrid(GridMap gridMap) {
 
         GridCell[][] grid = gridMap.gridCellMap;
 
         //Column number formating code
-        //int w = String.valueOf(grid.length).length(); //max number of digits for row number. Used for formatting row numbers.
-        //System.out.printf("%" + w + "s", "");//
         System.out.print(" ");
         for(int col = 0; col < grid[0].length; col++){
             System.out.printf("%d", col%10);//
@@ -261,21 +243,20 @@ public class AStarDriver {
                     System.out.printf("%c", 0x26AA);// medium white circle 
                 }else if (grid[row][col].isFinish) {
                     System.out.printf("%c", 0x26AB);// medium black circle 
-                }else if (grid[row][col].cost == Map.NORMAL) {
+                }else if (grid[row][col].cost == GridMap.NORMAL) {
                     System.out.printf("%c", ' ');// empty space
-                } else if (grid[row][col].cost == Map.BLOCK) {
+                } else if (grid[row][col].cost == GridMap.BLOCK) {
                     System.out.printf("%c", 0x2588);// solid box
-                } else if (grid[row][col].cost == Map.VERY_TOUGH) {
+                } else if (grid[row][col].cost == GridMap.VERY_TOUGH) {
                     System.out.printf("%c", 0x2592);// medium shade
-                } else if (grid[row][col].cost == Map.TOUGH) {
+                } else if (grid[row][col].cost == GridMap.TOUGH) {
                     System.out.printf("%c", 0x2593);// dark shade
-                } else if (grid[row][col].cost == Map.EASY) {
+                } else if (grid[row][col].cost == GridMap.EASY) {
                     System.out.printf("%c", 0x2591);// light shade
-                } else if (grid[row][col].cost == Map.PATH) {
+                } else if (grid[row][col].cost == GridMap.PATH) {
                     System.out.printf("%c", '*');// solid box
                 } else{//default
                     System.out.printf("%c", ' ');// empty space
-                    // System.out.printf("%c", 0x2591);// light shade
                 }
             }
             System.out.println();// newline

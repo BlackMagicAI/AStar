@@ -1,14 +1,12 @@
 package com.bmai.astar;
 
-//import java.awt.Point;
-
 /*
  * 
  * Program
  * Filename:	GridCell.java
  * 
  * Title:		GridCell class
- * Created on: 	Feb 1, 2005
+ * Created on: 	August 21, 2020
  * 
  * Author:		Maurice Tedder (based on the Java Applet by James Macgill - http://www.ccg.leeds.ac.uk/james/aStar/
  * 
@@ -51,15 +49,6 @@ public class GridCell {
      * indicates that this cell is a finish or target cell <code>isFinish</code>
      */
     public boolean isFinish;
-    /**
-     * Indicates that this is part of shortest path <code>partOfPath</code>
-     */
-    public boolean partOfPath;
-    /**
-     * This gridcells cost distance from start cell <code>distanceFromStart</code>
-     */
-    public double distanceFromStart;
-	
 
 	/**
 	 * 
@@ -78,8 +67,6 @@ public class GridCell {
 		isStart = false;
 		isFinish = false;
 		cost = 1.0;
-		distanceFromStart = -1;
-		partOfPath = false;
 	}//
 	
 	/**
@@ -88,30 +75,8 @@ public class GridCell {
      * method to replot and existing Map.
      */
 	public void clearCell(){
-		
-		//isStart = false;
-		//isFinish = false;
 		cost = 1;
-		distanceFromStart = -1;
-		partOfPath = false;
 	}//
-	
-    /**
-     * Calculates updated distance from startcell using distance traveled
-     * so far as a parameter.
-     * @param distanceSoFar - Distance from the startcell
-     */
-    public int addToPathFromStart(double distanceSoFar ){
-    
-    if (distanceFromStart == -1){ //? don't know about this part
-        distanceFromStart = distanceSoFar + cost;
-        return 0;
-    }//endif
-    if (distanceSoFar + cost < distanceFromStart){ //? don't know about this part
-        distanceFromStart = distanceSoFar + cost;
-    }//endif
-    	return 0;
-    }//
     
     /**
      * Is this cell an obstacle block?    
@@ -126,45 +91,4 @@ public class GridCell {
     		return false;
     	}//end if block
     }//
-    
-    /**
-     * Returns current distance of this griddcell from start gridcell.
-     * @return - the distance from the start cell.
-     */
-    public double getDistFromStart(){
-    if (isStart == true) { //if this is a start cell distance is zero 
-        return 0;
-    }//End If
-    if (isTotalBlock()){
-        return -1;
-    }//End If
-    return distanceFromStart;
-    }//
-
-    // Overriding the compare method to sort 
-    // needed to use this object in a Priority queue.
-    // @Override
-    // public int compare(GridCell d, GridCell d1) {
-    //     if(d.cost < d1.cost)
-    //         return 1;
-    //     else if (d.cost > d1.cost)
-    //         return -1;
-    //             return 0;
-    //     //return Double.compare(d.cost, d1.cost);//descending order
-    //     //return Double.compare(d1.cost, d.cost);//ascending order
-    // }
-
-    // needed to use this object in a Priority queue.
-    // @Override
-    // public int compareTo(GridCell o) {
-    //     //descending order
-    //     if (this.cost > o.cost) return 1;
-    //     if (this.cost < o.cost) return -1;
-    //     else return 0;
-
-    //     //ascending order
-    //     // if (o.cost > this.cost) return 1;
-    //     // if (o.cost < this.cost) return -1;
-    //     // else return 0;        
-    // }
 }//end class

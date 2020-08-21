@@ -1,7 +1,29 @@
-#os.system().path.append(".")
 from GridCell import GridCell, CellConstants
 from GridMap import GridMap
 from AStar import AStar
+
+#  Filename:	AStarDriver.py
+ 
+#  Title:		AStarDriver Class (version 1.0)
+#  Created on: 	July 29, 2020
+ 
+#  Last Date
+#  Modified:	
+ 
+#  Author:		Maurice Tedder (based on the Java Applet by James Macgill - http://www.ccg.leeds.ac.uk/james/aStar/
+#   			Informaion about A* algorithm by: Patel, Amits. Amit's A* Pages. Retrieved on February 2005 from
+#   			http://theory.stanford.edu/~amitp/GameProgramming.
+# Ref:
+#               https://www.redblobgames.com/pathfinding/grids/graphs.html
+#               https://www.redblobgames.com/pathfinding/a-star/introduction.html
+#               https://en.wikipedia.org/wiki/A*_search_algorithm
+# Target
+# Compilers:	python3
+
+# Description:	Driver test class command line user interface for the AStar
+#               path planning algorithm.
+#
+#
 
 
 # Displays gridMap as an ascii command line graphic
@@ -86,8 +108,6 @@ def calcAStar(gridMap):
 option = int(input("1. Manually Create Grid\n" +
 "2. Load from file\n"))
 
-#gridMap = None
-
 if option == 1:
     # Get user input for grid size
     cols = input("Enter number of Grid Map Columns: ")
@@ -109,7 +129,7 @@ displayGrid(gridMap)
 
 repeat = True
 while repeat:
-    print("*** Edit Cell Map ***")
+    print("*** In Edit Cell Map Mode ***")
 
     #get user input to add obstacle to grid
     col = int(input("Cell col: "))

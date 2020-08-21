@@ -38,14 +38,11 @@ class AStar:
 
     # Assemble A* breadcrumbs in to waypoints list
     def reconstructPath(self, cameFrom, current):
-        #print("len:" + str(len(cameFrom)) + "," + str(current.position.x) + ":" + str(current.position.y))
         total_path = [current]
         while current in cameFrom.keys():
-            #print("+")
             current = cameFrom[current]
             if current is not None:
                 total_path.insert(0, current)
-                #print(current.position)
         return total_path
 
 # Finds the shortest path from the start location to finish location
@@ -85,8 +82,6 @@ class AStar:
 
                 tentative_gScore = gScore[current] + next.cost
                 if next not in gScore or tentative_gScore < gScore.setdefault(next, float('inf')):                    
-                   # print(str(tentative_gScore) + "," + str(gScore.setdefault(next, float('inf'))))
-                    #print(next.position)
                     gScore[next] = tentative_gScore
                     fScore[next] = gScore[next] + self.cbDist(next.position, goal.position, 1.0) 
                     openSet.put(next, fScore[next])

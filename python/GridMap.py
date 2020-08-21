@@ -20,7 +20,6 @@ from Point import Point
 class GridMap:
 
     def __init__(self, mapWidth, mapHeight):
-        
         self.mapWidth = mapWidth
         self.mapHeight = mapHeight
         self.gridCellMap = [[GridCell(Point(col,row)) for col in range(self.mapWidth)] for row in range(self.mapHeight)]        

@@ -29,7 +29,7 @@ class CellConstants():
     VERY_TOUGH  = 10.0
 
     #Grid cell strength <code>BLOCK</code>
-    BLOCK  = float('inf') #100.0 #Double.MAX_VALUE
+    BLOCK  = float('inf')
 
     # Constant indicating that a gridcell is a normal
     # gridcell <code>NORMAL_CELL</code>
