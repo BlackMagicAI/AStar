@@ -8,11 +8,37 @@ import java.util.Scanner;
 import com.bmai.astar.*;
 
 /**
- * Driver test class for the AStar class in the com.bmai.astar package.
- * To compile run > javac AStarDriver.java
- * To run > java AStarDriver
- * Ref
- * Generate ascii maps from this Web site: https://www.dcode.fr/maze-generator
+ * 
+ * Program
+ * Filename:	AStarDriver.java
+ * 
+ * Title:		AStarDriver Class (version 2.0)
+ * Created on: 	August 21, 2020
+ * 
+ * Last Date
+ * Modified:	
+ * 
+ * @author Author Maurice Tedder
+ *              (based on the Java Applet by James Macgill - http://www.ccg.leeds.ac.uk/james/aStar/
+ * 				Informaion about A* algorithm by: Patel, Amits. Amit's A* Pages. Retrieved on February 2005 from
+ * 				http://theory.stanford.edu/~amitp/GameProgramming.
+ *              Additional references:
+ *              https://www.redblobgames.com/pathfinding/a-star/introduction.html
+ *              https://en.wikipedia.org/wiki/A*_search_algorithm
+ *              https://www.redblobgames.com/pathfinding/a-star/implementation.html#optimize-queue
+ *              https://www.redblobgames.com/pathfinding/grids/graphs.html
+ * Target
+ * Compilers:	Java - j2sdk 1.4.2
+ *
+ * Description:	Class that implements the A Start shortest path 
+ * 				algorithm for a grid map divided into a X x Y grid of gridcells.
+ *              
+ *              Driver test class for the AStar class in the com.bmai.astar package.
+ *              To compile run > javac AStarDriver.java
+ *              To run > java AStarDriver
+ * 
+ *              Ref:
+ *              Generate ascii maps from this Web site: https://www.dcode.fr/maze-generator
  */
 public class AStarDriver {
 
