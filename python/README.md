@@ -16,7 +16,7 @@ python3 AStarDriver
 Follow the command prompts to create a grid manually or read from a text file generated using this [online ascii maze generator tool](https://www.dcode.fr/maze-generator).
 
 ### Video
-YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Python.
+YouTube Tutorial Video is [here](https://youtu.be/EPt-S785PJE) for Python.
 
 ### Core Code
 

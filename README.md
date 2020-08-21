@@ -9,7 +9,7 @@ Grid Maps for the algorithm can be created manually or read from a text file gen
 
 ### Video
 * YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Java.
-* YouTube Tutorial Video is [here](https://youtu.be/xqHJxILaVrw) for Python.
+* YouTube Tutorial Video is [here](https://youtu.be/EPt-S785PJE) for Python.
 
 ### Core Code
 
