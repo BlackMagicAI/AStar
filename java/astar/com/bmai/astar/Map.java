@@ -1,6 +1,7 @@
 package com.bmai.astar;
 
-import java.awt.Point;
+//import java.awt.Point;
+import java.util.ArrayList;
 
 /*
  * 
@@ -39,7 +40,7 @@ public class Map {
      */
     public int mapHeight = 20;
 	//cost constants
-	public static final double PATH = 0;
+	public static double PATH = 0;
 	
     /**
      * Grid cell strength <code>EASY</code>
@@ -60,7 +61,7 @@ public class Map {
     /**
      * Grid cell strength <code>BLOCK</code>
      */
-    public  static double BLOCK  = 100;//Double.MAX_VALUE;
+    public  static double BLOCK  = Double.MAX_VALUE;
     /**
      *  Constant indicating that a gridcell is a normal
      *  gridcell <code>NORMAL_CELL</code>
@@ -91,7 +92,7 @@ public class Map {
 	public Map() {
 		super();//create map based on specified size parameters as an 2D array of GridCell objects
         gridCellMap = new GridCell[mapWidth][mapHeight];
-		initializeMap(); //set up map and initialize it with gridcells     
+		//initializeMap(); //set up map and initialize it with gridcells     
 		
 	}//
 	
@@ -102,7 +103,6 @@ public class Map {
 	 */
 	public Map(int mapWidth, int mapHeight) {
 		super();
-	      
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;        
         //create map based on specified size parameters as an 2D array of GridCell objects
@@ -118,13 +118,13 @@ public class Map {
           for (int j = 0; j < gridCellMap[i].length;j++){          	
           	 //for(int i = 0; i < 20; i++){
                 //for (int j = 0; j < 20;j++){
-               gridCellMap[i][j] = new GridCell();
-               gridCellMap[i][j].position = new Point(i, j); //set point coordinates               
+               gridCellMap[i][j] = new GridCell(new Point(i, j));
+               //gridCellMap[i][j].position = new Point(i, j); //set point coordinates               
                gridCellMap[i][j].resetCell();
                //minCost = Math.Min(minCost, gridCellMap(i, j).cellCost)
           }//end inner for loop
        }//end outer for loop
-	   }//
+	}//
 	
 	/**
 	 * Reset existing gridcells to initialized values.
@@ -136,6 +136,27 @@ public class Map {
 	          }//end inner for loop
 	       }//end outer for loop
 		   }//	
+
+	public GridCell[] getNeighbors(GridCell current){
+
+        Integer[][] dirs = {
+			{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+			
+        ArrayList<GridCell> result = new ArrayList<GridCell>();
+        for(Integer[] dir: dirs){
+			if (0 <= (current.position.x + dir[0]) && (current.position.x + dir[0]) < this.mapWidth
+			&& (0 <= (current.position.y + dir[1]) && (current.position.y + dir[1]) < this.mapHeight)){
+				GridCell node = this.gridCellMap[current.position.x + dir[0]][current.position.y + dir[1]];
+				result.add(node);
+			}
+		}
+            // 4-way neighbor search
+            // if 0 <= (current.position.x + dir[0]) < self.mapHeight and 0 <= (current.position.y + dir[1]) < self.mapWidth:
+            //     node = self.gridCellMap[current.position.x + dir[0]][current.position.y + dir[1]]
+			//     result.append(node)
+		GridCell arr[] = new GridCell[result.size()]; 
+        return result.toArray(arr);
+	}
 	/**
 	 * Finds surrounding gridcells that are adjacent to this one.
 	 * @param g - GridCell object to find adjacent cells.
@@ -297,12 +318,12 @@ public class Map {
           gridCellMap[xPosition][yPosition].isFinish = true;
           gridCellMap[xPosition][yPosition].cost = NORMAL;
       }//End If
-	  }//
+	}//
 	
 	/**
 	 * Set a gridcell to type of obstacle it represents and set cells that are dilationValue
 	 * parameter cells adjacent to this to the same value.
-	 ** @param xPosition - x grid coordinate of the cell to set.
+	 * @param xPosition - x grid coordinate of the cell to set.
 	 * @param yPosition - y grid coordinate of the cell to set.
 	 * @param gridCellCost - Cost value of the cell to be set.
 	 * @param cellType - Type of cell.

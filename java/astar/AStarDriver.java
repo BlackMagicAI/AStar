@@ -41,6 +41,7 @@ public class AStarDriver {
 
             System.out.println("You entered " + cols + " cols and " + rows + " rows");
             gridMap = manualGrid(rows, cols);
+            //gridMap = manualGrid(cols, rows);
             break;
 
         case 2:// load from file
@@ -116,7 +117,8 @@ public class AStarDriver {
         }//end while loop
 
         //Calculate A* path
-        gridMap = calcAStar(gridMap);
+        // gridMap = calcAStar(gridMap);
+        calcAStar(gridMap);
             
         //plot path on display grid
         displayGrid(gridMap);
@@ -130,7 +132,8 @@ public class AStarDriver {
     private static Map calcAStar(Map gridMap) {
 
         AStar aStar = new AStar();//shortest path algorithm class
-        Object[] pathWaypoints = aStar.findPath(gridMap);
+        //Object[] pathWaypoints = aStar.findPath(gridMap);
+        GridCell[] pathWaypoints = aStar.findPath2(gridMap);
 
         if(pathWaypoints == null ){//no path found        		
             System.out.println("NO PATH FOUND!");	 	        				
@@ -143,14 +146,23 @@ public class AStarDriver {
              */
             int waypointXCoordinate = 0;
             int waypointYCoordinate = 0;
-            for(Object gridCell: pathWaypoints){
-                if (((GridCell) gridCell).position.y > 0) {
-                    waypointXCoordinate = (int) (((GridCell) gridCell).position.x);
-                    waypointYCoordinate = (int) (((GridCell) gridCell).position.y);
+            for(GridCell gridCell: pathWaypoints){
+                // System.out.println("pos:" + gridCell.position);
+                //if (gridCell.position.y > 0) {
+                    waypointXCoordinate = (int) gridCell.position.x;
+                    waypointYCoordinate = (int) gridCell.position.y;
                     /* Ignore points at y = 0 coordinate for more accurate centroid */
                     gridMap.setGridCell(waypointXCoordinate, waypointYCoordinate, Map.PATH, Map.NORMAL_CELL);
-                } // end ignore y = 0 points
-            }
+                //} // end ignore y = 0 points
+            }            
+            // for(Object gridCell: pathWaypoints){
+            //     if (((GridCell) gridCell).position.y > 0) {
+            //         waypointXCoordinate = (int) (((GridCell) gridCell).position.x);
+            //         waypointYCoordinate = (int) (((GridCell) gridCell).position.y);
+            //         /* Ignore points at y = 0 coordinate for more accurate centroid */
+            //         gridMap.setGridCell(waypointXCoordinate, waypointYCoordinate, Map.PATH, Map.NORMAL_CELL);
+            //     } // end ignore y = 0 points
+            // }
         }
         return gridMap;
     }
@@ -169,7 +181,7 @@ public class AStarDriver {
             rows = Files.lines(path).count();
             long fileSize = Files.size(path);
             cols = (long) Math.ceil((((double) fileSize / rows) / 1.866));
-            gridMap = new Map((int) rows, (int) cols);// new Map((int)cols, (int)rows);
+            gridMap = new Map((int)rows, (int)cols);//new Map((int)cols, (int)rows); //
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -192,9 +204,9 @@ public class AStarDriver {
                     }
                 } else {
                     if (val == 32) {
-                        gridMap.setGridCell(y, x, Map.NORMAL, Map.NORMAL_CELL);
+                        gridMap.setGridCell(y,x, Map.NORMAL, Map.NORMAL_CELL);
                     } else {
-                        gridMap.setGridCell(y, x, Map.BLOCK, Map.NORMAL_CELL);
+                        gridMap.setGridCell(y,x, Map.BLOCK, Map.NORMAL_CELL);
                     }
                     x++;
                     if (x > cols - 1) {
@@ -234,22 +246,23 @@ public class AStarDriver {
         GridCell[][] grid = gridMap.gridCellMap;
 
         //Column number formating code
-        int w = String.valueOf(grid.length).length(); //max number of digits for row number. Used for formatting row numbers.
-        System.out.printf("%" + w + "s", "");//
+        //int w = String.valueOf(grid.length).length(); //max number of digits for row number. Used for formatting row numbers.
+        //System.out.printf("%" + w + "s", "");//
+        System.out.print(" ");
         for(int col = 0; col < grid[0].length; col++){
             System.out.printf("%d", col%10);//
         }
         System.out.println();// newline
 
         for (int row = 0; row < grid.length; row++) {
-            System.out.printf("%" + w + "d", row);//grid row number
+            System.out.printf("%d", row%10);//grid row number
             for (int col = 0; col < grid[row].length; col++) {
                 if (grid[row][col].isStart) {
                     System.out.printf("%c", 0x26AA);// medium white circle 
                 }else if (grid[row][col].isFinish) {
                     System.out.printf("%c", 0x26AB);// medium black circle 
                 }else if (grid[row][col].cost == Map.NORMAL) {
-                    System.out.printf("%c", 0x2591);// light shade
+                    System.out.printf("%c", ' ');// empty space
                 } else if (grid[row][col].cost == Map.BLOCK) {
                     System.out.printf("%c", 0x2588);// solid box
                 } else if (grid[row][col].cost == Map.VERY_TOUGH) {
@@ -257,9 +270,12 @@ public class AStarDriver {
                 } else if (grid[row][col].cost == Map.TOUGH) {
                     System.out.printf("%c", 0x2593);// dark shade
                 } else if (grid[row][col].cost == Map.EASY) {
-                    System.out.printf("%c", ' ');// solid box
+                    System.out.printf("%c", 0x2591);// light shade
                 } else if (grid[row][col].cost == Map.PATH) {
                     System.out.printf("%c", '*');// solid box
+                } else{//default
+                    System.out.printf("%c", ' ');// empty space
+                    // System.out.printf("%c", 0x2591);// light shade
                 }
             }
             System.out.println();// newline

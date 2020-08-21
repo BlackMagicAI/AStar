@@ -79,9 +79,9 @@ def calcAStar(gridMap):
     aStar = AStar() # shortest path algorithm class
     pathWaypoints = aStar.findPath(gridMap)
     if not pathWaypoints == None:
-        for point in pathWaypoints:
-            if not point == None:
-                gridMap.setGridCell(point.position.x, point.position.y, CellConstants.PATH, CellConstants.NORMAL_CELL)
+        for gridCell in pathWaypoints:
+            if not gridCell == None:
+                gridMap.setGridCell(gridCell.position.x, gridCell.position.y, CellConstants.PATH, CellConstants.NORMAL_CELL)
 
 option = int(input("1. Manually Create Grid\n" +
 "2. Load from file\n"))

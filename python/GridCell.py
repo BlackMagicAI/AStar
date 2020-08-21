@@ -65,4 +65,4 @@ class GridCell:
 
     # display this class as readable string in print methods.
     def __str__(self):
-        pass
+        return "(" + str(self.position.x) + "," + str(self.position.y) + ")"

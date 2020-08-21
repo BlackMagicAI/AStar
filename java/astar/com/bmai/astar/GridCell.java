@@ -1,6 +1,6 @@
 package com.bmai.astar;
 
-import java.awt.Point;
+//import java.awt.Point;
 
 /*
  * 
@@ -24,7 +24,8 @@ import java.awt.Point;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GridCell {
+// public class GridCell implements Comparator<GridCell>, Comparable<GridCell> {
+public class GridCell {    
 	
     /**
      * Grid coordinates of this gridcell as a Point type<code>position</code>
@@ -63,8 +64,9 @@ public class GridCell {
 	/**
 	 * 
 	 */
-	public GridCell() {
-		super();
+	public GridCell(Point position) {
+        super();
+        this.position = position;
 		resetCell();//reset cells parameters to default values
 	}
 
@@ -75,7 +77,7 @@ public class GridCell {
 		
 		isStart = false;
 		isFinish = false;
-		cost = 1;
+		cost = 1.0;
 		distanceFromStart = -1;
 		partOfPath = false;
 	}//
@@ -139,4 +141,30 @@ public class GridCell {
     return distanceFromStart;
     }//
 
+    // Overriding the compare method to sort 
+    // needed to use this object in a Priority queue.
+    // @Override
+    // public int compare(GridCell d, GridCell d1) {
+    //     if(d.cost < d1.cost)
+    //         return 1;
+    //     else if (d.cost > d1.cost)
+    //         return -1;
+    //             return 0;
+    //     //return Double.compare(d.cost, d1.cost);//descending order
+    //     //return Double.compare(d1.cost, d.cost);//ascending order
+    // }
+
+    // needed to use this object in a Priority queue.
+    // @Override
+    // public int compareTo(GridCell o) {
+    //     //descending order
+    //     if (this.cost > o.cost) return 1;
+    //     if (this.cost < o.cost) return -1;
+    //     else return 0;
+
+    //     //ascending order
+    //     // if (o.cost > this.cost) return 1;
+    //     // if (o.cost < this.cost) return -1;
+    //     // else return 0;        
+    // }
 }//end class

@@ -1,7 +1,11 @@
 package com.bmai.astar;
 
-import java.awt.Point;
+//import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
 /*
  * 
@@ -58,7 +62,95 @@ public class AStar {
 		openList = new ArrayList<GridCell>();   //open nodes list
 	    closedList = new ArrayList<GridCell>(); //closed nodes list
 	}//
-	
+    
+    //
+    public GridCell[] findPath2(Map gridMap){
+
+        GridCell startCell = gridMap.getStartCell();
+        // System.out.println(startCell.position);
+
+        GridCell goal = gridMap.getFinishCell();
+        // System.out.println(goal.position);
+
+        // A custom comparator that compares two Strings by their length.
+        // https://www.callicoder.com/java-priority-queue/
+        // Comparator<GridCell> GridCellComparator = new Comparator<GridCell>() {
+        //     @Override
+        //     public int compare(GridCell s1, GridCell s2) {
+        //         int result = (int) (s1.cost - s2.cost);
+        //         // int val = (int) (s2.cost - s1.cost);
+        //         //System.out.println(val);
+        //         return result;
+        //     }
+        // };
+
+        PriorityQueue<GridCell> openSet = new PriorityQueue<GridCell>(new GridCellComparator());
+        openSet.add(startCell);
+
+        HashMap<GridCell, Double> gScore = new HashMap<GridCell, Double>(); // cost so far
+        gScore.put(startCell, (double) 0.0);
+
+        //calculate huristic (h()) and add to g() to get f()
+        HashMap<GridCell, Double> fScore = new HashMap<GridCell, Double>();
+
+        HashMap<GridCell, GridCell> cameFrom = new HashMap<GridCell, GridCell>();
+        cameFrom.put(startCell, null);
+
+        GridCell current;
+        while (!openSet.isEmpty()) {
+            current = openSet.poll();
+            
+            if (current.equals(goal)){
+                System.out.println("Path found");
+                GridCell[] waypointsList = reconstructPath(cameFrom, current);//path found gridcells object array
+                return waypointsList;
+            }
+            
+            GridCell[] neighbors = gridMap.getNeighbors(current);
+            
+            for(GridCell next: neighbors){
+                double tentativeGScore = gScore.get(current) + next.cost;
+                if ((gScore.containsKey(next) == false) || tentativeGScore < gScore.getOrDefault(next, Double.MAX_VALUE)){
+                    gScore.put(next, tentativeGScore);
+                    fScore.put(next, gScore.get(next) + cbDist(next.position, goal.position, 1.0));//calculate huristic (h()) and add to g() to get f()
+                    //
+                    next.cost = fScore.get(next);
+                    openSet.add(next);
+                    cameFrom.put(next, current);
+                }
+            }
+    
+        }
+        System.out.println("Path not Found");
+        return null;
+    }
+
+    //Assemble A* breadcrumbs in to waypoints list
+    public GridCell[] reconstructPath(HashMap<GridCell, GridCell> cameFrom, GridCell current){
+        
+        System.out.println("len:" + cameFrom.size() + "," + current.position);
+        ArrayList<GridCell> totalPath = new ArrayList<GridCell>();
+        totalPath.add(current);
+int l = cameFrom.keySet().size();
+        //for (GridCell currentCell: cameFrom.keySet()){
+        for(int i=0; i < l; i++){
+            current = cameFrom.get(current);
+                // System.out.println(currentCell);
+                if (current != null){
+                    totalPath.add(0, current);
+                    //System.out.println(current.position);
+                }
+        }
+
+        GridCell[] arr = new GridCell[totalPath.size()];
+        return totalPath.toArray(arr);
+        // while current in cameFrom.keys():
+        //     current = cameFrom[current]
+        //     total_path.insert(0, current)
+        // return total_path
+    }
+
+
     /**
      * Finds the shortest path from the start location to finish location
      * using the A* algorithm and returns the waypoints of the path found
