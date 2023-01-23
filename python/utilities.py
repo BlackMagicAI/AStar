@@ -5,7 +5,7 @@ from AStar import AStar
 # Displays gridMap as an ascii command line graphic
 #
 # symbols unicode values 0x25A0 solid box 0x2593 dark shade 0x2592 medium shade
-# 0x2591 light shade 0x26AA medium white circle 0x26AB medium black circle
+# 0x2591 light shade 0x26AA medium white circle 0x1F534 medium red circle
 # 0x2588 full black block
 #
 # @param gridMap
@@ -25,7 +25,7 @@ def displayGrid(gridMap):
             if cell.isStart:
                 print(chr(0x26AA), end="")
             elif cell.isFinish:
-                print(chr(0x26AB), end="")
+                print(chr(0x1F534), end="")
             elif cell.cost == CellConstants.NORMAL:
                 print(' ', end="")
             elif cell.cost == CellConstants.BLOCK:
