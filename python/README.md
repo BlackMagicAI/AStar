@@ -18,6 +18,7 @@ Follow the command prompts to create a grid manually or read from a text file ge
 [AStar cloud API swagger docs](https://app.swaggerhub.com/apis/BlackMagicAI/a-star-cloud-api/v1)
 
 API URL: https://zpcatdueu8.execute-api.us-east-2.amazonaws.com/prod/astar
+
 Test api key for swagger: ES5fOwTsSi258heesU0so4jL6aDAs8eT4QxFDiFT
 
 ### Video
