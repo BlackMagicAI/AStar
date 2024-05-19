@@ -15,6 +15,8 @@ python3 AStarDriver
 
 Follow the command prompts to create a grid manually or read from a text file generated using this [online ascii maze generator tool](https://www.dcode.fr/maze-generator).
 
+[AStar cloud API swagger docs](https://app.swaggerhub.com/apis/BlackMagicAI/a-star-cloud-api/v1)
+
 ### Video
 YouTube Tutorial Video is [here](https://youtu.be/EPt-S785PJE) for Python.
 
