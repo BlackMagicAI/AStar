@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "d533ec6c-38e2-4338-8fda-12827d34baf9",
+		"name": "Aws astar api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35028695"
+	},
+	"item": [
+		{
+			"name": "https://zpcatdueu8.execute-api.us-east-2.amazonaws.com/prod/astar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "ES5fOwTsSi258heesU0so4jL6aDAs8eT4QxFDiFT"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"body\": \"   ████████████████████████████\\n               █        █     █\\n█  ███████  ████  ██████████  █\\n█     █                 █  █  █\\n█  █  ████████████████  █  █  █\\n█  █              █     █     █\\n█  ███████  █  █  ████  ████  █\\n█     █  █  █  █     █        █\\n███████  ████████████████  ████\\n█           █     █           █\\n████  ██████████  ████  ███████\\n█     █  █     █     █        █\\n████  █  ████  █  █  █  █  ████\\n█                 █  █  █  █  █\\n███████  █  ███████  ████  █  █\\n█  █     █     █     █  █     █\\n█  █  ███████  █  █  █  █  █  █\\n█     █     █  █  █        █  █\\n████  ████  █  █  █  ████  █  █\\n█     █       █  █     █  █  \\n████████████████████████████  \\n\",\n  \"start\": [\n    1,\n    3\n  ],\n  \"finish\": [\n    9,\n    2\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://zpcatdueu8.execute-api.us-east-2.amazonaws.com/prod/astar",
+					"protocol": "https",
+					"host": [
+						"zpcatdueu8",
+						"execute-api",
+						"us-east-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"astar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
